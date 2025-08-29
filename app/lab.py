@@ -20,7 +20,11 @@ def calculate_student_average(students: Dict[str, list[Dict[str, Any]]], student
    :param student_name: The name of the student to find
    :returns: The average of the student's exam grades, or 0 if not applicable
    """
-   return 0
+   if student_name not in students: return 0
+   exams = students[student_name]
+   if not exams: return 0
+   total = sum(exam["grade"] for exam in exams)
+   return total / len(exams)
 
 # Problem 2: Find the lowest and highest grades
 #
@@ -36,7 +40,16 @@ def lowest_highest_grade(students: Dict[str, list[Dict[str, Any]]]):
    :param students: A dictionary with students' names as keys, and a list of exams as values
    :returns: A tuple containing the lowest and highest test scores, in that order
    """
-   return (-10, -5)
+   lowest = None
+   highest = None
+   for student in students:
+      exams = students[student]
+      if not exams: continue
+      lowest_local = min(exam["grade"] for exam in exams)
+      lowest = min(lowest, lowest_local) if lowest else lowest_local
+      highest_local = max(exam["grade"] for exam in exams)
+      highest = max(highest, highest_local) if highest else highest_local
+   return (lowest, highest)
 
 # Problem 3: Find teacher requests
 # 
@@ -52,7 +65,11 @@ def print_feedback(students: Dict[str, list[Dict[str, Any]]]):
 
    :param students: A dictionary with students' names as keys, and a list of exams as values
    """
-   pass
+   for student in students:
+      exams = students[student]
+      for exam in exams:
+         if "Needs" in exam["comments"]:
+            print(f"[{student}] {exam["name"]} ({exam["grade"]}%): {exam["comments"]}")
 
 # Problem 4: Average across students
 #
@@ -65,7 +82,16 @@ def exam_average(students: Dict[str, list[Dict[str, Any]]], exam_name: str):
    :param exam_name: The name of the exam to average the scores from
    :returns: The average score for the exam across all students
    """
-   return 0
+   sum = 0
+   num_exams = 0
+   for student in students:
+      exams = students[student]
+      if not exams: continue
+      for exam in exams:
+         if exam["name"] == exam_name:
+            sum += exam["grade"]
+      num_exams += 1
+   return sum / num_exams
 
 # Bonus: Report Card
 #
@@ -101,4 +127,18 @@ def print_report_card(student_name: str, exams: list[Dict[str, Any]]):
    :param students_name: The name of the student
    :param exams: The list of exams the student has taken
    """
-   pass
+   subjects: Dict[str, list[str]] = {}
+   for exam in exams:
+      subject_name = exam["name"].split(" ")[0]
+      line = f"  {exam["name"]:<20} {exam["grade"]:<8} {exam["comments"]}"
+      if subject_name in subjects:
+         subjects[subject_name].append(line)
+      else:
+         subjects[subject_name] = [line]
+   print(f"**Report Card for {student_name}**\n")
+   for subject in subjects:
+      print(f"[{subject}]")
+      print(SUBJECT_HEADER)
+      for line in subjects[subject]:
+         print(line)
+      print()
