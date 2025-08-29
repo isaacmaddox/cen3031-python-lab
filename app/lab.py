@@ -20,7 +20,7 @@ def calculate_student_average(students: Dict[str, list[Dict[str, Any]]], student
    :param student_name: The name of the student to find
    :returns: The average of the student's exam grades, or 0 if not applicable
    """
-   if student_name not in students: return 0 # Safeguard, not necessary
+   if student_name not in students: return 0 # Safeguard, prevents an error on the next line
    exams = students[student_name]
    if not exams: return 0 # If there are no exams this prevents an error on the next line
    total = sum(exam["grade"] for exam in exams) # Create an iterable from each grade and sum them
