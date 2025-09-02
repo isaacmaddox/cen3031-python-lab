@@ -11,7 +11,7 @@ class Exam(TypedDict):
    grade: int
    comments: str
 
-StudentList = Dict[str, list[Exam]]
+StudentDict = Dict[str, list[Exam]]
 
 # Problem 1: Calculate a student's average grade
 # 
@@ -20,7 +20,7 @@ StudentList = Dict[str, list[Exam]]
 #     a. If the student does not exist, return `0`
 #   2. If the student has no exams, return 0
 #   3. Calculate and return the average of all of the exams the student has taken
-def calculate_student_average(students: StudentList, student_name: str):
+def calculate_student_average(students: StudentDict, student_name: str):
    """Calculate the average of all the student's exam grades
 
    :param students: A dictionary with students' names as keys, and a list of exam as values
@@ -41,7 +41,7 @@ def calculate_student_average(students: StudentList, student_name: str):
 # NOTE: The tuple should be in the order (lowest, highest)
 # You may assume that the list of students is never empty, but the list of exams
 # for any student may be empty
-def lowest_highest_grade(students: StudentList):
+def lowest_highest_grade(students: StudentDict):
    """Find the lowest and highest grade in the entire dataset
 
    :param students: A dictionary with students' names as keys, and a list of exams as values
@@ -69,7 +69,7 @@ def lowest_highest_grade(students: StudentList):
 # [Alice Johnson] Science Test 1 (79%): Needs improvement in lab work.
 #
 # Include a newline after each output
-def print_feedback(students: StudentList):
+def print_feedback(students: StudentDict):
    """Print a string representing every exam where certain feedback was given
 
    :param students: A dictionary with students' names as keys, and a list of exams as values
@@ -84,7 +84,7 @@ def print_feedback(students: StudentList):
 #
 # To complete this problem, calculate the average score across all students
 # for a specific test, given the test's name
-def exam_average(students: StudentList, exam_name: str):
+def exam_average(students: StudentDict, exam_name: str):
    """Get the average score for an exam across all students
 
    :param students: A dictionary with students' names as keys, and a list of exams as values
