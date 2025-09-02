@@ -4,9 +4,9 @@ CEN3031 Fall 2025
 
 Generated with the help of ChatGPT
 """
-from lab import StudentList
+from lab import StudentDict
 
-students: StudentList = {
+students: StudentDict = {
     "Alice Johnson": [
         {"name": "Math Test 1", "grade": 88, "comments": "Strong understanding of concepts."},
         {"name": "History Test 1", "grade": 92, "comments": "Well-written answers."},
