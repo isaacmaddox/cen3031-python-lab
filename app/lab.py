@@ -102,7 +102,7 @@ def exam_average(students: StudentDict, exam_name: str):
 #             and left-aligns the ouput
 SUBJECT_HEADER = "  Assignment Name      Grade    Feedback"
 
-def print_report_card(student_name: str, exams: list[Dict[str, Any]]):
+def print_report_card(student_name: str, exams: list[Exam]):
    """Print a "report card" to the console for the student
 
    :param students_name: The name of the student
