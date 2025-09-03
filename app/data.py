@@ -4,7 +4,7 @@ CEN3031 Fall 2025
 
 Generated with the help of ChatGPT
 """
-from lab import StudentDict
+from app.lab import StudentDict
 
 students: StudentDict = {
     "Alice Johnson": [
